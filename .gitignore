@@ -1,0 +1,20 @@
+# Python cache and compiled files
+__pycache__/
+*.pyc
+
+# Environment files with secrets
+.env
+
+# SQLite database file
+db.sqlite3
+
+# Media and static files (optional if you upload separately)
+media/
+staticfiles/
+
+# IDE and editor folders
+.vscode/
+.idea/
+
+# Virtual environment folder
+venv/
