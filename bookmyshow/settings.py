@@ -83,11 +83,10 @@ WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get(
-            'DATABASE_URL',
-            'postgres://postgres:root@localhost:5432/ticket_booking'
-        )
+    'default': dj_database_url.config(
+        default='postgres://postgres:root@localhost:5432/ticket_booking',
+        conn_max_age=600,
+        ssl_require=os.environ.get('RENDER') == 'true'
     )
 }
 
