@@ -84,7 +84,14 @@ WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 
 DATABASES = {
     
-    "default": dj_database_url.config(default=os.environ.get("postgres://postgres:root@localhost:5432/ticket_booking"))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'ticket_booking',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': '',
+        'PORT': '',
+    }
 }
 
 
