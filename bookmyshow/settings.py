@@ -27,11 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-default-for-dev-only')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '.vercel.app',
-]
+ALLOWED_HOSTS = ['bookmyshow.onrender.com']
 
 
 # Application definition
