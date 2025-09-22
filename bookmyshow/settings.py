@@ -89,8 +89,8 @@ DATABASES = {
         'NAME': 'ticket_booking',
         'USER': 'postgres',
         'PASSWORD': 'root',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'dpg-d36g9l0dl3ps738ah6vg-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
