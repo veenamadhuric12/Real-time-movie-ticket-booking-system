@@ -28,9 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-default-for-dev-only')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'bookmyshow.onrender.com'
+    '*'
 ]
 
 
