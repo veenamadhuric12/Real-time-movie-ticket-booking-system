@@ -27,11 +27,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-default-for-dev-only')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'bookmyshow.onrender.com'
-]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+if not ALLOWED_HOSTS or ALLOWED_HOSTS == ['']:
+    ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,9 +80,21 @@ WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-DATABASES = {
-    
-    'default': {
+db_url = os.environ.get('postgresql://ticket_booking_db_0gt1_user:FsEJ4ODr0igUwpAr5ICcgcsv2PWcg8WR@dpg-d36g9l0dl3ps738ah6vg-a.oregon-postgres.render.com/ticket_booking_db_0gt1', '').strip()
+
+if db_url:
+    # Only parse if DATABASE_URL is non-empty
+    DATABASES = {
+        'default': dj_database_url.parse(
+            db_url,
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
+else:
+    # fallback to sqlite for local dev
+    DATABASES = {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
         'NAME': 'ticket_booking',
         'USER': 'postgres',
@@ -92,7 +102,7 @@ DATABASES = {
         'HOST': '',
         'PORT': '',
     }
-}
+    }
 
 
 # Password validation
@@ -129,11 +139,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR/'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
