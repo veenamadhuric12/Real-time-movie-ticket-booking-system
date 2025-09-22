@@ -95,13 +95,9 @@ else:
     # fallback to sqlite for local dev
     DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'ticket_booking',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': '',
-        'PORT': '',
-    }
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
 
 
