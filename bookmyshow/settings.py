@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASE_URL = os.environ.get('DATABASE_URL', '').strip()
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL:
     DATABASES = {
