@@ -2,12 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+def movie_image_path(instance, filename):
+    # Ensure the directory name is safe for file paths
+    safe_title = instance.title.replace(" ", "_").replace("/", "_")
+    return os.path.join('movies', safe_title, filename)
+    
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=1000)
     release_date = models.DateField()
     duration = models.IntegerField(help_text="Duration in minutes")
-    image = models.ImageField(upload_to='movies/')
+    image = models.ImageField(upload_to=movie_image_path)
 
     def __str__(self):
         return self.title
