@@ -11,6 +11,8 @@
                 <p id="ip1">{{ movie.title }}</p>
                 <p id="ip2">{{movie.description}}</p>
             </div>
+        {% empty %}
+            <p>No movies available.</p>
         {% endfor %}
     </div>
     <br><br><br><br><br>
