@@ -149,4 +149,4 @@ def add_seats():
                     )
             print(f"Added 50 seats for {showtime}")
 
-add_seats()
+
