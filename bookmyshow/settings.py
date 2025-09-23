@@ -79,30 +79,33 @@ WSGI_APPLICATION = 'bookmyshow.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# Database
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-db_url = os.environ.get('postgresql://ticket_booking_db_0gt1_user:FsEJ4ODr0igUwpAr5ICcgcsv2PWcg8WR@dpg-d36g9l0dl3ps738ah6vg-a.oregon-postgres.render.com/ticket_booking_db_0gt1', '').strip()
+DATABASE_URL = os.environ.get('DATABASE_URL', '').strip()
 
-if db_url:
-    # Only parse if DATABASE_URL is non-empty
+if DATABASE_URL:
     DATABASES = {
         'default': dj_database_url.parse(
-            db_url,
+            DATABASE_URL,
             conn_max_age=600,
             ssl_require=True
         )
     }
 else:
-    # fallback to sqlite for local dev
+    # fallback to local dev or local postgres
     DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'ticket_booking',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': '',
-        'PORT': '',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'ticket_booking',
+            'USER': 'postgres',
+            'PASSWORD': 'root',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-    }
+
+
 
 
 # Password validation
