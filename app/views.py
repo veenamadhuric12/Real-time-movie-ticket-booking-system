@@ -48,11 +48,6 @@ def log_out(request):
     
 def movie_list(request):
     movies = Movie.objects.all()
-    if request.method == "POST":
-        search = request.POST.get("search")
-        print(search)
-        movies = Movie.objects.filter(title__icontains = search)
-        print(movies)
     context = {
         'movies':movies
     }
